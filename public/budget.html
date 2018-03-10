@@ -1,0 +1,60 @@
+<html>
+<head>
+	<style type="text/css">
+		table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+    </style>
+    
+</head>
+<body ng-app="login" ng-controller="loginController" ng-Init='viewBudget()'>
+	<div class="logo">
+       <a href="/index.html"><span class="fa fa-map-o">HOME</span></a>
+   </div>
+	<table class="table" >
+
+           	<tr>
+               <th>Location</th>
+               <th>Date</th>
+               <th>Target Budget</th>
+               <th>AirFare</th>
+               <th>Hotel Cost</th>
+               <th>Miscellaneous</th>
+               <th>Total</th>
+               <th>Under Buget</th>
+             </tr>
+
+        <tr ng-repeat="data in budgetData">
+ 
+               <td>{[{data.location}]}</td>
+               <td>{[{data.date}]}</td>
+               <td>{[{data.targerBudget}]}</td>
+               <td>{[{data.airfareCost}]}</td>
+               <td>{[{data.hostelCost}]}</td>
+               <td>{[{data.miscellaneous}]}</td>
+               <td>{[{data.totalCost}]}</td>
+               <td>{[{data.underBudget}]}</td>
+             </tr>
+
+    </table>
+
+	<script src="../javascript/angscript.js"></script>
+        <script src="../javascript/angular.min.js.map"></script>
+        <script src="../javascript/login.js"></script>
+        <script src="../javascript/angular-cookies.js"></script>
+</body>
+        
+</html>

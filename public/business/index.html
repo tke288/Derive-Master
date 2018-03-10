@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Dérive | Home</title>
+        <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png"/>
+
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/bootstrap-theme.min.css" rel="stylesheet">
+
+        <link href="assets/css/owl.carousel.css" rel="stylesheet">
+        <link href="assets/css/owl.theme.default.min.css" rel="stylesheet">
+
+        <link href="assets/css/magnific-popup.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+        <link href="assets/css/style.css" rel="stylesheet">
+        <style type="text/css">.pointer {cursor: pointer;}</style>
+
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body ng-app="login" ng-controller="loginController" ng-init="getloginStatus()">
+        <div id="menu-item" class="menu-item hide-menu">
+            <div class="container">
+                <ul>
+                    <a href="/index.html"><li>Home</li></a>
+                    <a href="#flight"><li>Flights</li></a>
+                    <a href="#expertise"><li> Hotels</li></a>
+                    <a href="#about"><li>Create a Budget</li></a>
+                    <a href="#contact"><li>Contact</li></a>
+                    <div class="pointer" ng-if="token.token===''">
+                      <a href="/users/login"><li>Login</li></a>
+                      <a href="/users/register"><li>Register</li></a>  
+                    </div>
+                    <div class="pointer" ng-if="token.token!=''">
+                        <a ng-click='getBudget()'><li>View Budget</li>
+                        <a ng-click="logout()"><li>Logout</li></a>
+                    </div>
+
+                </ul>
+            </div>
+        </div>
+        <div class="main">
+            <header class="bg-img header">
+                <nav class="navbar navbar-default navbar-Dérive">
+                    <div class="container">
+                        <div class="navigation-bar">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="logo">
+                                        <a href="/index.html"><span class="fa fa-map-o"></span></a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <div class="menu m">
+                                        <a href="#"><span class="ion-navicon _ion-android-menu"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <div class="container">
+                    <div class="row">
+                        <div class="intro-box">
+                            <div class="intro">
+                                <h1>Dérive</h1>
+                                <p>Business Trip Planner</p>
+                                <!-- <a class="btn Dérive-btn" href="#">Explore us</a> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <br><br>
+            
+            <section id="flight" class="flight section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <h2 class="title">FLIGHTS</h2>
+                            <div class="row form-container">
+                                <form action="#" method="post" class="form-inline" accept-charset="utf-8">
+                                  <fieldset>
+                                  </fieldset>
+                                  <fieldset>
+                                    <div class="row">
+                                      <div class="col-sm-12 form-group">
+                                        <div class="col-lg-2 col-md-6 col-xs-12" style="padding: 0;">
+                                                <p name="FROM" id="FROM" value="FROM"> FROM </p>
+                                          <label class="sr-only" for="departure">Departure Places</label>
+                                          <input type="text" class="form-control" style="width: 100%;" id="from" name="departure" placeholder="DFW">
+                                        </div>
+                                        <div class="col-lg-2 col-md-6 col-xs-12" style="padding: 0">
+                                                <p name="TO" id="TO" value="TO"> TO </p>
+                                          <label class="sr-only" for="landing">Landing Place</label>
+                                          <input type="text" class="form-control date" style="width: 100%" id="to" name="landing" placeholder="Airport">
+                                        </div>
+                                        <div class="col-lg-2 col-md-6 col-xs-12 date" style="padding: 0">
+                                                <p name="DEPART" id="DEPART" value="DEPART"> DEPART </p>
+                                          <label class="sr-only" for="departure_date">Date of Departure</label>
+                                          <input type="date" class="form-control" style="width: 100%" id="departure_date" name="departure_date" placeholder="YYYY/MM/DD">
+                                        </div>
+                                        <div class="col-lg-2 col-md-6 col-xs-12 date" style="padding: 0">
+                                                <p name="RETURN" id="RETURN" value="RETURN"> RETURN </p>
+                                          <label class="sr-only" for="return_date">Date of Return</label>
+                                          <input type="date" class="form-control" style="width: 100%" id="return_date" name="return_date" placeholder="YYYY/MM/DD">
+                                        </div>
+                                        <div id="popup-opener" class="col-lg-2 col-md-6 col-xs-12" style="padding: 0">
+                                                <p name="NUMBER" id="NUMBER" value="NUMBER"> PASSENGERS </p>
+                                          <label class="sr-only" for="number_of_people">Number of People</label>
+                                          <input type="number" class="form-control" style="width: 100%" id="number_of_people" name="number_of_people" value="1" >
+                                        </div>
+                                        <div class="col-lg-2 col-md-6 col-xs-12" style="padding: 0">
+                                            <br><br>
+                                            <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Search</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </fieldset>
+                                  <fieldset>
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                        <div class="checkbox">
+                                          <label class="check-label">
+                                            <input type="checkbox" id="nonstop"> Nonstop
+                                          </label>
+                                        </div>
+                                        <div class="checkbox">
+                                          <label class="check-label">
+                                            <input type="checkbox" id="cancelable"> Cancelable
+                                          </label>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </fieldset>
+                                </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+<div class="row">
+                   <div class="col-sm-12">  
+                   <div id= "preloader" class="preloader-2">
+                           <span class="line line-1"></span>
+                           <span class="line line-2"></span>
+                           <span class="line line-3"></span>
+                           <span class="line line-4"></span>
+                           <span class="line line-5"></span>
+                           <span class="line line-6"></span>
+                           <span class="line line-7"></span>
+                           <span class="line line-8"></span>
+                           <span class="line line-9"></span>
+                           <div>Loading</div>
+                         </div>
+                         </div>
+            <div class="row">
+                <div class="col-sm-3">             
+            <h4 class="flight-search"></h4>
+                </div>
+                <div class="col-sm-3">             
+            <h5 class="flight-search"></h5>
+                </div>
+                 <div class="col-sm-3">             
+             <h6 class="flight-search"></h6>
+                 </div>
+                 <div class="col-sm-3">             
+             <h3 class="flight-search"></h3>
+                 </div> 
+            </div>
+
+
+            <br><br>
+           
+            <section id="expertise" class="expert">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6 bg-img">
+                            <div></div>
+                        </div>
+                        <div class="col-sm-5 section">
+                            <h2 class="title">HOTELS</h2>
+                            <div id="expert-slider" class="owl-carousel">
+                                <div class="item">
+                                    <p>
+                                      If you travel frequently, use the same hotel each time. Get to know the staff. Regulars are recognized and treated as VIPs.
+                                    </p>
+                                </div>
+                                <div class="item">
+                                    <p>
+                                      If your hotel offers a hot breakfast buffet as well as a free continental breakfast, ask if you can get the hot breakfast with your room. Very rarely will we tell you no.
+                                    </p>
+                                </div>
+                                 <div class="item">
+                                    <p>
+                                        
+                                        Don’t call between 9 a.m. and 1 p.m. with a special request. Chances are I’ll have a long line of guests waiting to check out or in and will just want to get you off the phone.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <br><br>
+
+            <input id="pac-input" class="controls" type="text" placeholder="Search Box" style="width:200px">
+<div id="map" style="height: 300px"></div>
+
+<div class="container search-results-container hidden">
+  <br> <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row search-results">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<section id="about" class="about section">
+  <div class="container">
+
+                <h2 class="mt80">CREATE A BUDGET</h2>
+                <form class="mb80">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="LOCATION: "style = "width:565px" ng-model='business.location'>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="DATE: " style = "width:600px" ng-model='business.date'>
+                        </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm-6">
+                              <input type="text" class="form-control" placeholder="TARGET BUDGET: $" style = "width:565px" ng-model='business.targerBudget'>
+                          </div>
+                          <div class="col-sm-6">
+                              <input type="text" class="form-control" placeholder="AIRFARE COST: $" style = "width:600px" ng-model='business.airfareCost'>
+                          </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" placeholder="HOTEL COST: $" style = "width:565px" ng-model='business.hostelCost'>
+                            </div>
+                            <div class="col-sm-6">
+                              <input type="text" class="form-control" placeholder="MISCELLANEOUS AMOUNT: $" style = "width:600px" ng-model='business.miscellaneous'>
+                          </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" placeholder="TOTAL COST: $" style = "width:565px" ng-model='business.totalCost'>
+                            </div>
+                              <div class="col-sm-6">
+                                  <input type="text" class="form-control" placeholder="UNDER BUDGET: $" style = "width:600px" ng-model='business.underBudget'>
+                              </div>
+                              </div>
+                              
+
+                        <div class="col-sm-12">
+                            <button class="btn Dérive-btn mr60" ng-click="saveBusinessBudget()">SAVE</button>
+                            <button type="reset" class="btn Dérive-btn" ng-click="getBudget()">VIEW ALL BUDGETS</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+</section>
+<div id="workstation-slider" class="owl-carousel">
+<div class="item">
+  <div class="Dérive-card">
+      <div class="Dérive-card-header">
+          <img class="img-responsive" src="assets/images/business-trip1.jpg">
+      </div>
+  </div>
+</div>
+<div class="item">
+  <div class="Dérive-card">
+      <div class="Dérive-card-header">
+          <img class="img-responsive" src="assets/images/business-trip2.jpg">
+      </div>
+  </div>
+</div>
+<div class="item">
+  <div class="Dérive-card">
+      <div class="Dérive-card-header">
+          <img class="img-responsive" src="assets/images/business-trip3.jpg">
+      </div>
+  </div>
+</div>
+</div>
+
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p> Plan your trip with Dérive</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <script>
+          // This example adds a search box to a map, using the Google Place Autocomplete
+          // feature. People can enter geographical searches. The search box will return a
+          // pick list containing a mix of places and predicted search terms.
+      
+          // This example requires the Places library. Include the libraries=places
+          // parameter when you first load the API. For example:
+          // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+      
+          var places = [];
+          var nearbyPlaces;
+      
+      
+          function initAutocomplete() {
+              var map = new google.maps.Map(document.getElementById('map'), {
+                  center: {lat: 32.7767, lng: -96.7970},
+                  zoom: 13,
+                  mapTypeId: 'roadmap'
+              });
+      
+              // Create the search box and link it to the UI element.
+              var input = document.getElementById('pac-input');
+              var searchBox = new google.maps.places.SearchBox(input);
+              map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+      
+              nearbyPlaces = new google.maps.places.PlacesService(map);
+      
+              // Bias the SearchBox results towards current map's viewport.
+              map.addListener('bounds_changed', function () {
+                  searchBox.setBounds(map.getBounds());
+              });
+      
+              var markers = [];
+              // Listen for the event fired when the user selects a prediction and retrieve
+              // more details for that place.
+              searchBox.addListener('places_changed', function () {
+                  places = searchBox.getPlaces();
+      
+                  if (places.length == 0) {
+                      return;
+                  }
+      
+                  // Clear out the old markers.
+                  markers.forEach(function (marker) {
+                      marker.setMap(null);
+                  });
+                  markers = [];
+      
+                  // For each place, get the icon, name and location.
+                  var bounds = new google.maps.LatLngBounds();
+                  places.forEach(function (place) {
+                      if (!place.geometry) {
+                          console.log("Returned place contains no geometry");
+                          return;
+                      }
+                      var icon = {
+                          url: place.icon,
+                          size: new google.maps.Size(71, 71),
+                          origin: new google.maps.Point(0, 0),
+                          anchor: new google.maps.Point(17, 34),
+                          scaledSize: new google.maps.Size(25, 25)
+                      };
+      
+                      // Create a marker for each place.
+                      markers.push(new google.maps.Marker({
+                          map: map,
+                          icon: icon,
+                          title: place.name,
+                          position: place.geometry.location
+                      }));
+      
+                      if (place.geometry.viewport) {
+                          // Only geocodes have viewport.
+                          bounds.union(place.geometry.viewport);
+                      } else {
+                          bounds.extend(place.geometry.location);
+                      }
+                  });
+                  map.fitBounds(bounds);
+      
+                  if (places[0].geometry) {
+                      map.panTo(places[0].geometry.location);
+                      map.setZoom(15);
+                      search();
+                  } else {
+                      document.getElementById('autocomplete').placeholder = 'Enter a city';
+                  }
+              });
+      
+              function search() {
+                  var search = {
+                      bounds: map.getBounds(),
+                      types: ['lodging']
+                  };
+      
+                  nearbyPlaces.nearbySearch(search, function (results, status) {
+                      if (status === google.maps.places.PlacesServiceStatus.OK) {
+                          console.log(results);
+      
+      
+                          $('.search-results-container').removeClass('hidden');
+                          $('.search-results').empty();
+      
+                          results.forEach(function (hotel) {
+      
+                              var html = '';
+      
+                              html += '<div class="col-xs-12"> ' +
+                                  '<div class="thumbnail">' +
+                                  '<div class="row">' +
+                                  '<div class="col-xs-6">' +
+                                  '<img style="width: 100%; max-height: 400px" src="' + (hotel.photos ? hotel.photos[0].getUrl({
+                                      maxWidth: 640,
+                                      height: 300,
+                                      width: 300
+                                  }) : '') + '">' +
+                                  '</div> ' +
+                                  '<div class="col-xs-6">' +
+                                  '<div id = "'+ hotel.id + '-map" style = "height: 400px; width: 100%" > </div>' +
+                                  '</div> ' +
+                                  '</div>' +
+                                  '<div class="caption"> ' +
+                                  '<h3>' + hotel.name + '</h3> ' +
+                                  '<p>' + "Rating: " +  hotel.rating + '</p>' +
+                                  '<p>' + hotel.vicinity + '</p> ' +
+                                  '</div> ' +
+                                  '</div> ' +
+                                  '</div> ';
+                              $('.search-results').append(html);
+                              setTimeout(function () {
+                                  var hotelMap = new google.maps.Map(document.getElementById(hotel.id + '-map'), {
+                                      center: {lat: -33.8688, lng: 151.2195},
+                                      zoom: 13,
+                                      mapTypeId: 'roadmap'
+                                  });
+      
+                                  var boundsHotel = new google.maps.LatLngBounds();
+                                  var icon = {
+                                      url: hotel.icon,
+                                      size: new google.maps.Size(71, 71),
+                                      origin: new google.maps.Point(0, 0),
+                                      anchor: new google.maps.Point(17, 34),
+                                      scaledSize: new google.maps.Size(25, 25)
+                                  };
+      
+                                  // Create a marker for each place.
+                                  markers.push(new google.maps.Marker({
+                                      map: hotelMap,
+                                      icon: icon,
+                                      title: hotel.name,
+                                      position: hotel.geometry.location
+                                  }));
+      
+                                  if (hotel.geometry.viewport) {
+                                      // Only geocodes have viewport.
+                                      boundsHotel.union(hotel.geometry.viewport);
+                                  } else {
+                                      boundsHotel.extend(hotel.geometry.location);
+                                  }
+                                  hotelMap.fitBounds(boundsHotel);
+      
+                              })
+      
+                          })
+      
+                      } else {
+                          $('.search-results-container').removeClass('hidden');
+                      }
+                  });
+              }
+                
+      
+          }
+      
+      </script>
+      <script src="bower_components/jquery/dist/jquery.min.js"></script>
+      <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9RcZThofRGkKhsCC01bimNzXYRBSb5W0&libraries=places&callback=initAutocomplete"
+              async defer></script>
+
+        <script src="assets/js/jquery-3.1.1.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/owl.carousel.min.js"></script>
+        <script src="https://use.fontawesome.com/55b73bf748.js"></script>
+        <script src="assets/js/jquery.magnific-popup.js"></script>
+        <script src="assets/js/script.js"></script>
+        <script src="assets/js/flight.js"></script>
+        <script src="../javascript/angscript.js"></script>
+        <script src="../javascript/angular.min.js.map"></script>
+        <script src="../javascript/login.js"></script>
+        <script src="../javascript/angular-cookies.js"></script>
+    </body>
+</html>

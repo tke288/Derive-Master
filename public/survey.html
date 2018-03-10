@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Dérive | Elements</title>
+        <link rel="shortcut icon" type="image/x-icon" href="assets/images/logo.png"/>
+
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/bootstrap-theme.min.css" rel="stylesheet">
+
+        <link href="assets/css/owl.carousel.css" rel="stylesheet">
+        <link href="assets/css/owl.theme.default.min.css" rel="stylesheet">
+
+        <link href="assets/css/magnific-popup.css" rel="stylesheet">
+
+        <link href="assets/css/style.css" rel="stylesheet">
+
+
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <!-- SCRIPTS AND LINKS -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+    </head>
+    <body>
+        <div id="menu-item" class="menu-item hide-menu">
+            <div class="container">
+                <ul>
+                        <a href="index.html"><li>home</li></a>
+                        <a href="#about"><li>About</li></a>
+                        <a href="survey.html"><li>Where should you go next?</li></a>
+                        <a href="business/index.html"><li> Plan a Business Trip</li></a>
+                        <a href="elements.html"><li>Contact</li></a>
+                        <a href="login.html"><li>Log in</li></a>
+                        <a href="register.html"><li>Register</li></a>
+                </ul>
+            </div>
+        </div>
+        <div class="main">
+                <header class="bg-img header">
+                    <nav class="navbar navbar-default navbar-Dérive">
+                        <div class="container">
+                            <div class="navigation-bar">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="logo">
+                                    <a href="index.html"><span class="fa fa-map-o"></span></a>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 text-right">
+                                <div class="menu m">
+                                    <a href="#"><span class="ion-navicon _ion-android-menu"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+<!-- survey -->
+<main>
+    <div class="container">
+      <div class="row">
+        <div class="col s12 z-depth-5 mainpanel">
+          <div id="mainpanel-content">
+            <h1>Survey Questions</h1>
+            <div class="divider"></div>
+            <div id="q1_div">
+                <h3><font color ="black">What does your ideal vacation entail?</font></h3>
+                <select class= "displayHidden" id="q1">
+                <option value="" selected>Select your answer</option>
+                <option value="1">Relaxtion</option>
+                <option value="2">Excitement</option>
+                <option value="3">Culture</option>
+              </select>
+              <button type="button" class="btn btn-primary btn-md" id="nextButton1">Next!</button>
+            </div>
+
+            <div id="q2_div">
+                <h3><font color ="black">What kind of weather do you like?</font></h3>
+                <select class= "displayHidden" id="q2">
+                <option value="" selected>Select your answer</option>
+                <option value="1">Cold</option>
+                <option value="2">Warm</option>
+                <option value="3">Hot</option>
+              </select>
+              <button type="button" class="btn btn-primary btn-md" id="nextButton2">Next!</button>
+            </div>
+
+            <div id="q3_div">
+                <h3><font color ="black">What is your age range?</font></h3>
+                <select class= "displayHidden" id="q3">
+                <option value="" selected>Select your answer</option>
+                <option value="1">19-29</option>
+                <option value="2">30-39</option>
+                <option value="3">40-49</option>
+                </select>
+                <button type="button" class="btn btn-primary btn-md" id="nextButton3">Next!</button>
+            </div>  
+
+            <div id="finalize">
+                    <button type="submit" class="btn btn-primary btn-md" id="dobtn">Find my Vacation!</button>
+            </div>
+        
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="goAgain" class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-3">Would you like to take the quiz again?</h1>
+          <a href="/survey"><button type="button" class="btn btn-outline-primary btn-lg">Go to the survey</button></a>                      
+        </div>
+      </div>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="dataResults" class="text-center"></div>
+    </div>
+</div>
+    </main>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+        $("#goAgain").hide();
+        $('#finalize').hide();
+        $("#q2_div").hide();
+        $("#q3_div").hide();
+        });
+
+        $("#nextButton1").on("click", function(event){
+        event.preventDefault();
+            $("#q1_div").hide();
+            $("#q2_div").show();
+        })
+
+        $("#nextButton2").on("click", function(event){
+        event.preventDefault();
+            $("#q2_div").hide();
+            $("#q3_div").show();
+        })
+
+        $("#nextButton3").on("click", function(event){
+        event.preventDefault();
+            $("#q3_div").hide();
+            $("#finalize").show();
+        })
+
+
+        $("#dobtn").on("click", function (event) {
+            event.preventDefault();
+            $("#goAgain").hide();
+            var scorvals = [];
+            scorvals.push($("#q1").val());
+            scorvals.push($("#q2").val());
+            scorvals.push($("#q3").val());
+            
+            var chkResults = {
+                answers: scorvals
+            };
+
+            $.post("/api/new", chkResults)
+                .done(function (data) {
+                    console.log("data 0",data[0]);
+                    console.log("data 1",data[1]);
+                    console.log("data 2",data[2]);
+                    console.log("data 3",data[3]);
+                    $("#mainData").hide();
+                    $("#myModal").show();
+                    $("#dataResults").html('<h3><font color="black">Click the Photo to View Your Vacation</font></h3>');
+                    $("#dataResults").append('<a href="'+data[0]+'"><img src="' + data[1] +'" width="300"></a>');
+                    // $("#dataResults").append('<img src="' + data[1] +'" width="300">');
+                    
+                    // Get the modal
+                    var modal = document.getElementById('myModal');
+
+                    // Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
+
+                    // When the user clicks on <span> (x), close the modal
+                    span.onclick = function () {
+                        modal.style.display = "none";
+                        $("#goAgain").show();
+                    }
+
+                    // When the user clicks anywhere outside of the modal, close it
+                    window.onclick = function (event) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                            $("#goAgain").show();
+                        }
+                    }
+
+                });
+        });
+    </script>
+    <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <p> Handcrafted with <span class="fa fa-heart"></span> by <a href="http://themewagon.com/">ThemeWagon</a></p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <script src="assets/js/jquery-3.1.1.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/owl.carousel.min.js"></script>
+        <script src="https://use.fontawesome.com/55b73bf748.js"></script>
+        <script src="assets/js/jquery.magnific-popup.js"></script>
+        <script src="assets/js/script.js"></script>
+    </body>
+</html>

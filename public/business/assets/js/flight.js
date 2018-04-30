@@ -12,7 +12,7 @@ var numbPeople = 0;
 
 function runQuery() {
 
-  var queryURL = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=lvioe6dpmfiwjvxLj7wXIzgtnwjjeJzx&origin=" + From + "&destination=" + To + "&departure_date=" + departure_date + "&return_date=" + return_date + "&adults=" + numbPeople + "&number_of_results=4";
+  var queryURL = "https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=l7Glr8BU1lvFrGAVxC7dgTGf4iBKdR8j&origin=" + From + "&destination=" + To + "&departure_date=" + departure_date + "&return_date=" + return_date + "&adults=" + numbPeople + "&number_of_results=4";
 
   
 
